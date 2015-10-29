@@ -1,0 +1,5 @@
+https://praw.readthedocs.org/en/stable/
+https://praw.readthedocs.org/en/stable/pages/getting_started.html
+https://github.com/praw-dev/praw
+https://docs.python.org/2/library/functions.html#next
+http://stackoverflow.com/questions/2225038/determine-the-type-of-an-object
