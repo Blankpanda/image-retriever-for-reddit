@@ -1,25 +1,24 @@
 import praw
 import sys
-
+import urllib
 
 from entry import *
 
 
 r = praw.Reddit(user_agent="Test Script by /u/blankpanda")
 
-username  = get_username()
-password  = get_password()
-subreddit = get_subreddit_name()
+username = get_username()
+password = get_password()
+subreddit_name = get_subreddit_name()
 
-get_limit = 1
+request_limit = 10
 
 r.login(username, password, disable_warning=True)
 
-#user = r.get_redditor(username)
-#print(user.link_karma + user.comment_karma)
+submissions = r.get_subreddit(subreddit_name).get_top(limit = request_limit)
 
-submissions = r.get_subreddit(subreddit).get_hot(limit = get_limit)
-submissions = next(submissions)
-# research praw.objects.permissions in https://github.com/praw-dev/praw
+count = 0
 
-print (type(submissions))
+for submission in submissions:
+    urllib.request.urlretrieve(submission.url, "test" + str(count) + ".jpg")
+    count += 1
