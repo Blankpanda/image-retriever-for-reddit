@@ -1,7 +1,8 @@
 import praw, sys, urllib, re, os
 from entry import *
+from downloader import *
 
-request_limit = 1
+request_limit = 25
 
 
 r = praw.Reddit(user_agent="Awwnime Image Grabber for Reddit /u/blankpanda")
@@ -20,8 +21,15 @@ for submission in submissions:
     tag = re.search("\[(.*?)\]", submission.title)
     folder_name = tag.group(0)
 
-
-    os.makedirs(folder_name)
-
-    urllib.request.urlretrieve(submission.url,
-    folder_name + "/" + "img_" + str(submission.id) + ".jpg")
+    if os.path.exists(folder_name):
+        append_image_to_existing_directory(
+        submission.url,
+        folder_name,
+        submission.id
+        )
+    else:
+        download_image(
+        submission.url,
+        folder_name,
+        submission.id
+        )
