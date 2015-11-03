@@ -2,7 +2,7 @@ import praw, sys, urllib, re, os
 from entry import *
 from downloader import *
 
-request_limit = 25
+request_limit = 10
 
 
 r = praw.Reddit(user_agent="Awwnime Image Grabber for Reddit /u/blankpanda")
@@ -19,17 +19,31 @@ submissions = r.get_subreddit(subreddit_name).get_hot(limit = request_limit)
 # downloads images
 for submission in submissions:
     tag = re.search("\[(.*?)\]", submission.title)
-    folder_name = tag.group(0)
 
-    if os.path.exists(folder_name):
-        append_image_to_existing_directory(
-        submission.url,
-        folder_name,
-        submission.id
-        )
+    if tag == None:
+        if os.path.exists("tagless"):
+            download_image_tagless_append(
+            submission.url,
+            submission.id
+            )
+        else:
+            download_image_tagless(
+            submission.url,
+            submission.id
+            )
+
     else:
-        download_image(
-        submission.url,
-        folder_name,
-        submission.id
-        )
+        folder_name = tag.group(0)
+
+        if os.path.exists(folder_name):
+            download_image_append(
+            submission.url,
+            folder_name,
+            submission.id
+            )
+        else:
+            download_image(
+            submission.url,
+            folder_name,
+            submission.id
+            )
