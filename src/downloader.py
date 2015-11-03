@@ -1,6 +1,11 @@
 import urllib, os
 
+bad_characters = ["<", ">", ":", "/", "\\", "|", "?", "*" , '"']
+
 def download_image(url, folder_name, id):
+    for character in bad_characters:
+        if character in folder_name:
+            folder_name = folder_name.replace(character, "")
     os.makedirs(folder_name)
     urllib.request.urlretrieve(url, folder_name + "/"
     + "img_" + str(id) + ".jpg")

@@ -2,17 +2,12 @@ import praw, sys, urllib, re, os
 from entry import *
 from downloader import *
 
-request_limit = 10
+request_limit = 25
 
 
-r = praw.Reddit(user_agent="Awwnime Image Grabber for Reddit /u/blankpanda")
+r = praw.Reddit(user_agent=" Image Grabber for Reddit by /u/blankpanda")
 
-#username = get_username()
-#password = get_password()
 subreddit_name = get_subreddit_name()
-
-
-#r.login(username, password, disable_warning=True)
 
 submissions = r.get_subreddit(subreddit_name).get_hot(limit = request_limit)
 
