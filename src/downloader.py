@@ -24,3 +24,12 @@ def download_image_tagless_append(url,id):
     folder_name = "tagless"
     urllib.request.urlretrieve(url, folder_name + "/"
     + "img_" + str(id) + ".jpg")
+
+def download_album_image(url,id, index):
+    os.makedirs(str(id))
+    urllib.request.urlretrieve(url, id + "/"
+    + str(index) + ".jpg")
+
+def download_album_image_append(url,id, index):
+    urllib.request.urlretrieve(url, id + "/"
+    + str(index) + ".jpg")
