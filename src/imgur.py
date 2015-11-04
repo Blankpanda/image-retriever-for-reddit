@@ -10,12 +10,14 @@ def get_album_ids(urls):
     return album_ids
 
 def download_imgur_album(url):
-    print("SX")
+
     count = 0
     html_source = requests.get(str(url)).text
     soup = BeautifulSoup(html_source, "html.parser")
-    matches = soup.find_all('meta')
+    matches = soup.find_all("meta")
+
     for match in matches:
-        print(match.get('content'))
-    #    urllib.request.urlretrieve('http:' + imageUrl, "test_" + str(count) + ".jpg")
-        count += 1
+        if "http://i.imgur.com" in match.get('content'):
+            url = match.get('content')
+            urllib.request.urlretrieve(url, "test_" + str(count) + ".jpg")
+            count += 1
