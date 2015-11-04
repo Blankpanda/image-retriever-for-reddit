@@ -1,9 +1,5 @@
-import beautifulsoup4
-
-client_id = 'YOUR CLIENT ID'
-client_secret = 'YOUR CLIENT SECRET'
-
-client = ImgurClient(client_id, client_secret)
+import requests, urllib
+from bs4 import BeautifulSoup
 
 def get_album_ids(urls):
     album_ids = []
@@ -13,7 +9,25 @@ def get_album_ids(urls):
         album_ids.append(url_id)
     return album_ids
 
-def imgur_album(urls):
-    album = client.get_album(id)
-    for x in album:
-        print(x.link)
+def download_imgur_album(urls):
+    album_ids = get_album_ids(urls)
+    count = 0
+    for url in urls:
+        html_source = requests.get(url).text
+        soup = BeautifulSoup(html_source, "html.parser")
+        matches = soup.select('.album-view-image-link a')
+        for match in matches:
+            imageUrl = match['href']
+            urllib.request.urlretrieve('http:' + imageUrl, test + str(count) + ".jpg")
+
+            # if os.path.exists("tagless"):
+            #     download_image_tagless_append(
+            #     imageUrl,
+            #     album_ids[count]
+            #     )
+            # else:
+            #     download_image_tagless(
+            #     imageUrl,
+            #     album_ids[count]
+            #     )
+            count += 1

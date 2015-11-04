@@ -52,7 +52,5 @@ for submission in submissions:
             )
 
 #download imgur albums
-album_ids = get_album_ids(album_list)
-
-for album_id in album_ids:
-    imgur_album(album_id)
+print(album_list)
+download_imgur_album(album_list)
