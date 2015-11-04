@@ -11,11 +11,11 @@ def get_album_ids(urls):
 
 def download_imgur_album(url):
     print("SX")
+    count = 0
     html_source = requests.get(str(url)).text
     soup = BeautifulSoup(html_source, "html.parser")
-    matches = soup.select(".album-view-image-link")
-    print(matches)
+    matches = soup.find_all('meta')
     for match in matches:
-        imageUrl = match['href']
-        urllib.request.urlretrieve('http:' + imageUrl, "test_" + str(count) + ".jpg")
+        print(match.get('content'))
+    #    urllib.request.urlretrieve('http:' + imageUrl, "test_" + str(count) + ".jpg")
         count += 1

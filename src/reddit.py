@@ -3,7 +3,7 @@ from entry import *
 from downloader import *
 from imgur import *
 
-request_limit = 10
+request_limit = 1
 
 
 r = praw.Reddit(user_agent=" Image Grabber for Reddit by /u/blankpanda")
