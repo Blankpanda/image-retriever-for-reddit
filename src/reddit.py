@@ -10,15 +10,15 @@ r = praw.Reddit(user_agent=" Image Grabber for Reddit by /u/blankpanda")
 
 subreddit_name = get_subreddit_name()
 
-submissions = r.get_subreddit(subreddit_name).get_hot(limit = request_limit)
+submissions = r.get_subreddit(subreddit_name).get_top_from_all(limit = request_limit)
 
-album_list = []
 
 # downloads single images create a list of the albums
 for submission in submissions:
 
-    if "http://imgur.com/a/" in submission.url:
-        album_list.append(submission.url)
+    if "/a/" in submission.url:
+        print(submission.url)
+        download_imgur_album(submission.url)
 
 
     tag = re.search("\[(.*?)\]", submission.title) # retrieves tag in brackets.
@@ -52,5 +52,3 @@ for submission in submissions:
             )
 
 #download imgur albums
-print(album_list)
-download_imgur_album(album_list)
