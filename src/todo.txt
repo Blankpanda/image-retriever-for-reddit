@@ -1,2 +1,3 @@
 support png image
 download imgur albums
+test imgur album download
