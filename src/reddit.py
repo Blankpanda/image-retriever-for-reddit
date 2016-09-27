@@ -19,13 +19,21 @@ subreddit_name = get_subreddit_name()
 submissions = r.get_subreddit(subreddit_name).get_hot(limit = request_limit)
 
 
-# downloads single images create a list of the albums
+# downloads images
 for submission in submissions:
+<<<<<<< HEAD
     
     if "/a/" in submission.url:
         download_imgur_album(submission.url)
+=======
+
+    if submission.stickied:
+>>>>>>> ed264e1de64cab05f969195deb9a9ddce5a7852b
         continue
 
+    if "/a/" in submission.url: # is it an imgur album?
+        download_imgur_album(submission.url)
+        continue
 
     tag = re.search("\[(.*?)\]", submission.title) # retrieves tag in brackets.
 
@@ -56,5 +64,3 @@ for submission in submissions:
             folder_name,
             submission.id
             )
-
-#download imgur albums
