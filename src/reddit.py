@@ -1,9 +1,15 @@
-import praw, sys, urllib, re, os
+import praw
+import sys
+import urllib
+import re
+import os
+import time
+
 from entry import *
 from downloader import *
 from imgur import *
 
-request_limit = 25
+request_limit = 10
 
 
 r = praw.Reddit(user_agent=" Image Grabber for Reddit by /u/blankpanda")
@@ -15,7 +21,7 @@ submissions = r.get_subreddit(subreddit_name).get_hot(limit = request_limit)
 
 # downloads single images create a list of the albums
 for submission in submissions:
-
+    
     if "/a/" in submission.url:
         download_imgur_album(submission.url)
         continue

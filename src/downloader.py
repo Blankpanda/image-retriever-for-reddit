@@ -1,4 +1,5 @@
-import urllib, os
+import urllib
+import os
 
 bad_characters = ["<", ">", ":", "/", "\\", "|", "?", "*" , '"']
 
